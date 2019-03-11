@@ -56,3 +56,7 @@ man() {
       LESS_TERMCAP_us=$(printf "\e[1;32m") \
       man "$@"
 }
+
+
+# Try having the syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
