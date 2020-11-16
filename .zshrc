@@ -33,12 +33,13 @@ alias spm="sudo pacman"
 #------------------------------
 alias start_nabu="nabu switch-profile live;nabu login"
 alias connect_staging="mysql -A -h mariadb.db.staging.can1.alayacare.net -u tracktik -ptt34trick"
+alias data_scrum="python /mnt/c/Users/ericp/dev/AlayaCare/alaya-personal/data_team_scrum_order.py"
+alias sphinx_scrum="python /mnd/c/Users/ericp/dev/AlayaCare/alaya-personal/sphinx_team_scrum_order.py"
 
 #------------------------------
 ## Python Related Aliases
 #------------------------------
 
-alias tabpystart="/home/ericp/PythonEnvironments/TableauIntegration/lib/python3.7/site-packages/tabpy_server/startup.sh"
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
 #------------------------------
@@ -47,12 +48,6 @@ alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d =
 
 # Create a Python Environment with "Name"
 alias pythonenv="python -m venv"
-
-# Activate Data Science Environment
-alias datascience="source /home/ericp/PythonEnvironments/DataScience/bin/activate"
-
-# Activate TableauIntegration Environment
-alias tabpy="source /home/ericp/PythonEnvironments/TableauIntegration/bin/activate"
 
 #------------------------------
 # Path Stuff
@@ -75,6 +70,32 @@ man() {
       man "$@"
 }
 
+#Fix Corrupt Hist File
+fix_hist() {
+	mv ~/.histfile ~/.histfile_bad
+	strings ~/.histfile_bad > ~/.histfile
+	fc -R ~/.histfile
+	rm ~/.histfile_bad
+}
 
-# Try having the syntax highlighting
+#Get Database Staging
+function get_staging() {
+	nabu get "v1/tenant/${1}?environment=staging" | jq ${2}
+}
+
+#Get Database UAT
+function get_uat() {
+	nabu get "v1/tenant/${1}?environment=uat" | jq ${2}
+}
+
+#Virtual Environment Initialization
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+if which pyenv-virtualenv-init > /dev/null; then
+	    eval "$(pyenv virtualenv-init -)";
+fi
+
+# Add plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+autoload -U compinit && compinit
