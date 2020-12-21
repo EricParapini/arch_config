@@ -1,0 +1,3 @@
+auracle-git
+powershell
+pyenv-virtualenv
