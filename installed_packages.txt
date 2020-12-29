@@ -1,5 +1,4 @@
 arch-install-scripts
-auracle-git
 autoconf
 automake
 aws-cli
@@ -42,9 +41,7 @@ pandoc
 pandoc-crossref
 patch
 pkgconf
-powershell
 pyenv
-pyenv-virtualenv
 python
 python-beautifulsoup4
 python-bottleneck
