@@ -38,30 +38,6 @@ alias start_nabu="nabu switch-profile live;nabu login"
 #------------------------------
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
-#Get Database Staging
-function get_staging() {
-	nabu get "v1/tenant/${1}?environment=staging" | jq ${2}
-}
-
-#Get Database UAT
-function get_uat() {
-	nabu get "v1/tenant/${1}?environment=uat" | jq ${2}
-}
-
-
-#------------------------------
-## Python Virtual Environmnerts
-#------------------------------
-# Create a Python Environment with "Name"
-alias pythonenv="python -m venv"
-
-
-#Virtual Environment Initialization
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-if which pyenv-virtualenv-init > /dev/null; then
-	    eval "$(pyenv virtualenv-init -)";
-fi
 
 #------------------------------
 # Path Stuff
